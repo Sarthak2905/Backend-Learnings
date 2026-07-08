@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
         },
         coverImage: {
             type: String,
-            required: true
+            required: false
         },
         watchHistory: [
             {
@@ -57,7 +57,7 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
-userSchema.method.generatAccessToken = function () {
+userSchema.methods.generatAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -71,7 +71,7 @@ userSchema.method.generatAccessToken = function () {
         }
     )
 }
-userSchema.method.generatRefreshToken = function () {
+userSchema.methods.generatRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
