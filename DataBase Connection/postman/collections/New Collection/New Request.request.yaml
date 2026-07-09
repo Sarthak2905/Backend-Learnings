@@ -1,0 +1,34 @@
+$kind: http-request
+name: New Request
+url: http://localhost:5000/api/v1/users/register
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: fullName
+      value: Sarthak Hendre
+      description: ""
+      disabled: false
+    - type: text
+      key: email
+      value: s@gmail.com
+      description: ""
+      disabled: false
+    - type: text
+      key: password
+      value: "123456789"
+      description: ""
+      disabled: false
+    - type: text
+      key: username
+      value: sarthak
+      description: ""
+      disabled: false
+    - type: file
+      key: avatar
+      src:
+        - /C:/Users/Sarthak/OneDrive/Pictures/coding/Untitled-1.webp
+      description: ""
+      disabled: false
+order: 1783583661966
