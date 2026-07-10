@@ -1,0 +1,11 @@
+$kind: http-request
+name: logout
+description: ""
+url: http://localhost:5000/api/v1/users/logout
+method: POST
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 4442342764014164

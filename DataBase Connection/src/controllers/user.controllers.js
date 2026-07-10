@@ -63,7 +63,8 @@ const registerUser = asyncHandler( async (req,res) =>{
     // console.log(req.files);
 
     console.log(req.files);
-console.log(req.body);
+    
+    console.log(req.body);
     // check for images, check for avatar
     const avatarLocalPath = req.files?.avatar?.[0]?.path;
     // const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
@@ -202,6 +203,8 @@ const logoutUser = asyncHandler(async(req,res) =>{
     .clearCookie("refreshToken",options)
     .json(new ApiResponse(200, {}, "User logged Out"))
 })
+
+
 
 export {
     registerUser,
