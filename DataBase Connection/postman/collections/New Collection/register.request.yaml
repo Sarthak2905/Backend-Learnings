@@ -1,5 +1,5 @@
 $kind: http-request
-name: New Request
+name: register
 url: http://localhost:5000/api/v1/users/register
 method: POST
 body:
@@ -7,22 +7,22 @@ body:
   content:
     - type: text
       key: fullName
-      value: Sarthak Hendre
+      value: Sarthak N Hendre
       description: ""
       disabled: false
     - type: text
       key: email
-      value: s@gmail.com
+      value: sarthak@gmail.com
       description: ""
       disabled: false
     - type: text
       key: password
-      value: "123456789"
+      value: "12345678"
       description: ""
       disabled: false
     - type: text
       key: username
-      value: sarthak
+      value: sarthak123
       description: ""
       disabled: false
     - type: file

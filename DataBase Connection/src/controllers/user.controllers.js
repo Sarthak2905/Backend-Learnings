@@ -5,25 +5,30 @@ import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 
 
-const generateAccessAndRefreshTokens = async(userId) =>{
+const generateAccessAndRefreshTokens = async (userId) => {
     try {
-        // it find user based on userId
-        const user = await User.findById(userId)
+        console.log("Step 1");
+        const user = await User.findById(userId);
 
-        // It generate access & refresh tokens
-        const accessToken = User.generateAccessToken()
-        const refreshToken = User.generateRefreshToken()
+        console.log("Step 2");
+        const accessToken = user.generateAccessToken();
 
-        // it store refresh token in database
-        user.refreshToken = refreshToken
-        await user.save({ validateBeforeSave: false })
+        console.log("Step 3");
+        const refreshToken = user.generateRefreshToken();
 
-        return {accessToken, refreshToken} // And is stored
-        
+        console.log("Step 4");
+        user.refreshToken = refreshToken;
+
+        console.log("Step 5");
+        await user.save({ validateBeforeSave: false });
+
+        console.log("Step 6");
+        return { accessToken, refreshToken };
     } catch (error) {
-        throw new ApiError(500, "Something went wrong while generating refresh and access token")
+        console.error("Actual Error:", error);
+        throw error;
     }
-}
+};
 
 const registerUser = asyncHandler( async (req,res) =>{
      // get user details from frontend
@@ -117,9 +122,10 @@ const loginUser = asyncHandler(async (req, res) =>{
 
     // req body -> data
     const {email, username, password} = req.body
-
+    console.log(email);
+    
     // username or email
-    if(!username || !email){
+    if(!(username || email)){
         throw new ApiError(400, "username or email is required")
     }
 
@@ -157,11 +163,15 @@ const loginUser = asyncHandler(async (req, res) =>{
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
-        {
-            user: loggedInUser, accessToken,refreshToken,
-            
-        },
-        "User logged in Successfully"
+        new ApiResponse(
+            200,
+             {
+                user: loggedInUser,
+                accessToken,
+                refreshToken
+            },
+            "User logged in Successfully"
+        )
     )
 
 
